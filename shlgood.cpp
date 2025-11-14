@@ -1,5 +1,7 @@
 /**
  * SHLGOOD - Dãy Dịch Trái Tốt (Good Left-Shift Sequence)
+ * File Input:  SHLGOOD.INP
+ * File Output: SHLGOOD.OUT
  * 
  * Problem Statement:
  * Given an array A of n elements (A₁, A₂, ..., Aₙ).
@@ -13,18 +15,20 @@
  * 
  * Task: Count the number of contiguous subsequences that are "good left-shift sequences"
  * 
- * Input:
+ * Input (SHLGOOD.INP):
  * - Line 1: Integer n (1 ≤ n ≤ 5×10⁵)
  * - Line 2: n integers A₁, A₂, ..., Aₙ (-10⁹ ≤ Aᵢ ≤ 10⁹)
  * 
- * Output:
+ * Output (SHLGOOD.OUT):
  * - Single integer: count of good left-shift subsequences
  * 
  * Example:
  * Input:  6
  *         1 3 2 6 4 5
  * Output: 7
- * Good subsequences: (1,3), (3,2), (2,6), (6,4), (4,5), (3,2,6,4), (1,3,2,6,4,5)
+ * 
+ * Good subsequences that satisfy condition:
+ * (1,3), (3,2), (2,6), (6,4), (4,5), (3,2,6,4), (1,3,2,6,4,5)
  * 
  * Algorithm:
  * - Use Fenwick Tree (BIT) for efficient range queries
@@ -35,14 +39,14 @@
  * Time Complexity: O(n log n)
  * Space Complexity: O(n)
  * 
- * Constraints:
- * - 12% tests: n ≤ 500
- * - 24% tests: n ≤ 5000
- * - 20% tests: all elements distinct
- * - 44% tests: no additional constraints
+ * Constraints (Subtasks):
+ * - Subtask 1 (12%): n ≤ 500
+ * - Subtask 2 (24%): n ≤ 5000
+ * - Subtask 3 (20%): aᵢ are pairwise distinct
+ * - Subtask 4 (44%): No additional constraints
  * 
  * Author: Truong Trung Bao
- * Source: DL Problem Set - Vietnam National Training Camp
+ * Source: DL Problem Set - Vietnam National Informatics Training Camp 2022
  */
 
 #include <bits/stdc++.h>

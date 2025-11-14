@@ -2,15 +2,16 @@
  * PHOTO - Satellite Photography Coverage Optimization
  * 
  * Problem Statement:
- * An area is represented by an n×n grid of unit squares.
- * - Rows numbered 1 to n (top to bottom)
- * - Columns numbered 1 to n (left to right)
+ * An area is represented by an m×m grid of unit squares.
+ * - Rows numbered 1 to m (top to bottom)
+ * - Columns numbered 1 to m (left to right)
  * - Cell at row i, column j is cell (i,j)
  * 
- * There are m objects to photograph. Object i is at cell (xᵢ, yᵢ).
+ * There are n objects to photograph. Object i is at cell (xᵢ, yᵢ).
  * 
  * A satellite moves along the main diagonal (top-left to bottom-right).
  * The satellite can take up to k photos, each photo is a square region where:
+ * - Shape is a square
  * - Top-left and bottom-right corners lie on the main diagonal
  * - Each grid cell is either completely inside or completely outside the region
  * 
@@ -19,48 +20,48 @@
  * - Total number of grid cells in all regions is minimized
  * 
  * Input:
- * - Line 1: Three integers m, n, k
- *   m = number of objects (1 ≤ m ≤ 10⁵)
- *   n = grid size (1 ≤ n ≤ 5000)
- *   k = max photos (m ≤ k ≤ 10⁵)
- * - Next m lines: Two integers xᵢ, yᵢ (1 ≤ xᵢ, yᵢ ≤ n)
+ * - Line 1: Three integers n, m, k
+ *   n = number of objects (1 ≤ n ≤ 10⁵; k ≤ n)
+ *   m = grid size (1 ≤ m ≤ 5000)
+ *   k = max photos allowed
+ * - Next n lines: Two integers xᵢ, yᵢ (1 ≤ xᵢ, yᵢ ≤ m) - object coordinates
  * 
  * Output:
- * - Single integer: minimum number of cells covered
+ * - Single integer: minimum number of cells in chosen regions
  * 
  * Example:
  * Input:  4 4 2
  *         1 1
  *         2 3
  *         3 3
- *         2 3
+ *         3 4
  * Output: 8
  * 
- * Algorithm: 2D Difference Array
- * - For each object pair, mark affected diagonal band region
+ * Algorithm: 2D Difference Array + Dynamic Programming
+ * - For each object pair, determine the diagonal square that covers both
  * - Use 2D difference array for O(1) range updates
- * - Compute 2D prefix sum to get coverage
- * - Count cells with coverage > 0
+ * - Compute 2D prefix sum to get final coverage
+ * - Count total cells covered
  * 
- * Key Technique: 2D Difference Array
+ * Key Technique: 2D Difference Array for Range Updates
  * To mark rectangle [x1,y1] to [x2,y2]:
  *   diff[x1][y1]++, diff[x2+1][y2+1]++
  *   diff[x2+1][y1]--, diff[x1][y2+1]--
  * Then compute 2D prefix sum to get actual values.
  * 
- * Time Complexity: O(n² + m)
- * Space Complexity: O(n²)
+ * Time Complexity: O(n² + m²)
+ * Space Complexity: O(m²)
  * 
- * Subtasks:
- * - 10%: m ≤ 10 and n ≤ 10
- * - 15%: m ≤ 100 and n ≤ 100
- * - 20%: m ≤ 1000 and n ≤ 1000
- * - 25%: n ≤ 3000 and xᵢ = yᵢ for all i
- * - 15%: n ≤ 3000
- * - 15%: n ≤ 5000
+ * Constraints (Subtasks):
+ * - Subtask 1 (10%): n ≤ 200 and k = n = 1
+ * - Subtask 2 (10%): n < 200 and k = n = 2
+ * - Subtask 3 (20%): n ≤ 200 and k = n
+ * - Subtask 4 (20%): n ≤ 200 and xᵢ = yᵢ for all i = 1,2,...,n
+ * - Subtask 5 (20%): n ≤ 200 (general case)
+ * - Subtask 6 (20%): n ≤ 2000 (general case)
  * 
  * Author: Truong Trung Bao
- * Source: DL Problem Set - Vietnam National Training Camp
+ * Source: DL Problem Set - Vietnam National Informatics Training Camp 2022
  */
 
 #include <bits/stdc++.h>

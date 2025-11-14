@@ -1,57 +1,62 @@
 /**
  * ATTACK - Minimum Cost Cannon Positioning
+ * File Input:  attack.inp
+ * File Output: attack.out
  * 
  * Problem Statement:
- * Kingdom X is under threat of attack from Empire Y. Empire Y has organized 
- * L military groups numbered 1 to L in a line attacking from the North.
- * Kingdom X built a fortress parallel to enemy formation, divided into L zones.
+ * Kingdom X is under threat from Empire Y, which has organized L military groups
+ * (numbered 1 to L) in a line attacking from the North. Kingdom X has built a
+ * fortress parallel to the enemy formation, divided into L zones.
  * 
- * Kingdom X manufactured n heavy cannons with attack radius R.
- * A cannon at position i can destroy all enemy groups in range [i-R+1, i+R-1].
+ * Kingdom X has manufactured N heavy cannons with attack radius R. Each cannon
+ * can destroy all enemy groups in its attack range [position - R + 1, position + R - 1].
  * 
- * Initially, cannon i is placed at zone Aᵢ (1 ≤ Aᵢ ≤ L).
+ * Initially, cannon i is placed at zone pᵢ (1 ≤ pᵢ ≤ L).
  * Moving a cannon to an adjacent zone costs 1 unit.
- * Final position xᵢ must satisfy: 1 ≤ xᵢ ≤ L.
+ * Final position qᵢ must satisfy: 1 ≤ qᵢ ≤ L.
  * 
- * Task: Find minimum cost to reposition cannons so that when fired simultaneously,
- * all enemy groups are destroyed.
+ * Task: Find the minimum cost to reposition cannons so that when fired
+ * simultaneously, all L enemy groups are destroyed.
  * 
  * Input (attack.inp):
- * - Line 1: Three integers n, L, R
- *   n = number of cannons (1 ≤ n ≤ 10⁵)
- *   L = number of enemy groups/zones (1 ≤ L ≤ 10⁷)
+ * - Line 1: Three integers N, L, R
+ *   N = number of cannons
+ *   L = number of enemy groups/zones
  *   R = attack radius
- * - Line 2: n integers Aᵢ (1 ≤ Aᵢ ≤ L) - initial positions
+ * - Line 2: N integers pᵢ (1 ≤ pᵢ ≤ L) - initial cannon positions
  * 
  * Output (attack.out):
- * - Single integer: minimum cost to destroy all enemies
+ * - Single integer: minimum cost to destroy all enemy groups
  * 
  * Examples:
- * Input:   2 5 2        Input:   2 5 2
- *          3 5                   5 5
- * Output:  1            Output:  3
+ * Example 1:
+ *   Input:  2 5 2
+ *           3 5
+ *   Output: 1
+ *   Explanation: Cannon 1 at pos 3 covers [2,4]; Cannon 2 at pos 5 covers [4,5].
+ *   Zone 1 is not covered. Move cannon 1 left by 1 → cost = 1. Zones covered: [1,5].
  * 
- * Explanation (Example 1):
- * - Cannon 1 at pos 3: covers [2,4]
- * - Cannon 2 at pos 5: covers [4,6] (but zone 6 doesn't exist, so [4,5])
- * - Zone 1 not covered! Move cannon 1 left by 1 → cost = 1
+ * Example 2:
+ *   Input:  2 5 2
+ *           5 5
+ *   Output: 3
  * 
  * Algorithm Approaches:
- * - Sub1 (L ≤ 20): Brute force with bitmask - O(2^L × L)
- * - Sub2 (L = n×(2R-1)): Greedy assignment - O(n)
- * - Sub3 (General): Dynamic Programming - O(L × n)
+ * - Subtask 1: Brute force with bitmask - O(2^L)
+ * - Subtask 2 (special case L = N×(2R-1)): Greedy - O(N)
+ * - General: Dynamic Programming - O(L×N)
  * 
- * Subtasks:
- * - Subtask 1 (25%): All values ≤ 100
- * - Subtask 2 (25%): All values ≤ 5000 and L = n×(2R-1)
- * - Subtask 3 (25%): n ≤ 20 and L ≤ 1000
- * - Subtask 4 (25%): n ≤ 1000 and L ≤ 10000
+ * Constraints (Subtasks):
+ * - Subtask 1 (25%): All values ≤ 10
+ * - Subtask 2 (25%): All values ≤ 1000 and (2R-1)×N = L
+ * - Subtask 3 (25%): 1 ≤ N ≤ 10³, 1 ≤ L, pᵢ, R ≤ 10⁸
+ * - Subtask 4 (25%): 1 ≤ N ≤ 10⁵, 1 ≤ L, pᵢ, R ≤ 10⁸
  * 
- * Time Complexity: O(L×n) for DP solution
+ * Time Complexity: O(L×N) for DP solution
  * Space Complexity: O(L)
  * 
  * Author: Truong Trung Bao
- * Source: DL Problem Set - Vietnam National Training Camp
+ * Source: DL Problem Set - Vietnam National Informatics Training Camp 2022
  */
 
 #include <bits/stdc++.h>
