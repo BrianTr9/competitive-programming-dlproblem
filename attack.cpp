@@ -107,7 +107,7 @@ bool check(int mask) {
     FOR(i, 1, L) cnt[i] = 0;
     
     // Mark coverage ranges using difference array technique
-    FOR(i, 1, L) if (mask >> i - 1 & 1)
+    FOR(i, 1, L) if ((mask >> (i - 1)) & 1)
         cnt[max(1, i - R + 1)] += 1, cnt[min(L, i + R - 1) + 1] -= 1;
 
     // Check if all positions are covered
@@ -122,7 +122,7 @@ bool check(int mask) {
 ll calc(int mask) {
     int soldierIdx = 0;
     ll totalCost = 0;
-    FOR(i, 1, L) if (mask >> i - 1 & 1) { 
+    FOR(i, 1, L) if ((mask >> (i - 1)) & 1) { 
         ++soldierIdx;
         totalCost += abs(arr[soldierIdx] - i);
     }
